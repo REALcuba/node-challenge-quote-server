@@ -18,6 +18,20 @@ app.get("/", function (request, response) {
 });
 
 //START OF YOUR CODE...
+// calling all quotes
+app.get("/quotes", (req, res) => {
+  res.send(quotes);
+});
+
+//calling random quotes
+app.get("/quotes/random", (req, res) => {
+  res.send(pickFromArray(quotes));
+});
+
+app.get("/quotes/search", (req, res) => {
+  const term = req.query.term.toLowerCase();
+  res.send(`${term}`);
+});
 
 //...END OF YOUR CODE
 
@@ -32,6 +46,6 @@ function pickFromArray(arr) {
 //Start our server so that it listens for HTTP requests!
 let port = 5000;
 
-app.listen( port, function () {
+app.listen(port, function () {
   console.log("Your app is listening on port " + port);
 });
