@@ -29,8 +29,13 @@ app.get("/quotes/random", (req, res) => {
 });
 
 app.get("/quotes/search", (req, res) => {
-  const term = req.query.term.toLowerCase();
-  res.send(`${term}`);
+  const term = req.query.term.toLocaleLowerCase();
+  const search = quotes.filter(
+    (item) =>
+      item.quote.toLowerCase().includes(term) ||
+      item.author.toLowerCase().includes(term)
+  );
+  res.send(search);
 });
 
 //...END OF YOUR CODE
